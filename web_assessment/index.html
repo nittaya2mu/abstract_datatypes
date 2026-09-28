@@ -1,1 +1,179 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบแบบประเมินออนไลน์ - วิชา 01204212</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; font-family: 'Sarabun', sans-serif; }
+        .card { border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: none; }
+        .header-bg { background: linear-gradient(135deg, #1f4e79, #2c3e50); color: white; border-radius: 12px 12px 0 0; }
+        .btn-primary { background-color: #1f4e79; border-color: #1f4e79; }
+        .btn-primary:hover { background-color: #153452; }
+    </style>
+</head>
+<body>
 
+<div class="container my-5">
+    <div class="card mb-4">
+        <div class="p-4 header-bg text-center">
+            <h3 class="fw-bold mb-1">แบบประเมินการทำงานกลุ่มและผลงานโครงงาน</h3>
+            <p class="mb-0 text-white-50">รายวิชา 01204212 แบบชนิดข้อมูลนามธรรมและการแก้ปัญหา</p>
+        </div>
+        <div class="card-body p-4">
+            <!-- Navigation Tabs -->
+            <ul class="nav nav-pills nav-justified mb-4" id="evalTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active fw-bold" id="form1-tab" data-bs-toggle="tab" data-bs-target="#form1" type="button" role="tab">
+                        แบบประเมินที่ 1: การมีส่วนร่วมในกลุ่ม (ความลับ)
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link fw-bold" id="form2-tab" data-bs-toggle="tab" data-bs-target="#form2" type="button" role="tab">
+                        แบบประเมินที่ 2: ประเมินการนำเสนอกลุ่มอื่น & โหวต
+                    </button>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="evalTabContent">
+                <!-- FORM 1 -->
+                <div class="tab-pane fade show active" id="form1" role="tabpanel">
+                    <form id="evalForm1" onsubmit="submitForm1(event)">
+                        <div class="alert alert-info">
+                            <strong>คำชี้แจง:</strong> ผลการประเมินนี้เป็นความลับ ให้ประเมินสมาชิกทุกคนในกลุ่มรวมทั้งตัวเอง (เกณฑ์คะแนน 1 - 5)
+                        </div>
+                        
+                        <h5 class="fw-bold text-primary mb-3">ส่วนที่ 1: ข้อมูลผู้ประเมิน</h5>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                <label class="form-label">ชื่อ-นามสกุล ผู้ประเมิน</label>
+                                <input type="text" class="form-control" required id="f1_student_name">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">รหัสนิสิต</label>
+                                <input type="text" class="form-control" required id="f1_student_id">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">ชื่อกลุ่ม/กลุ่มที่</label>
+                                <input type="text" class="form-control" required id="f1_group_name">
+                            </div>
+                        </div>
+
+                        <h5 class="fw-bold text-primary mb-3">ส่วนที่ 2: ประเมินเพื่อนร่วมกลุ่มรายบุคคล (คะแนน 1-5)</h5>
+                        <div class="table-responsive mb-4">
+                            <table class="table table-bordered text-center align-middle">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>ชื่อ-สกุล สมาชิก</th>
+                                        <th>เข้าร่วมประชุม</th>
+                                        <th>รับผิดชอบงาน</th>
+                                        <th>คุณภาพงาน</th>
+                                        <th>ช่วยเหลือเพื่อน</th>
+                                        <th>ส่งงานตรงเวลา</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="text" class="form-control" value="(ตนเอง)" required></td>
+                                        <td><input type="number" min="1" max="5" class="form-control text-center" required></td>
+                                        <td><input type="number" min="1" max="5" class="form-control text-center" required></td>
+                                        <td><input type="number" min="1" max="5" class="form-control text-center" required></td>
+                                        <td><input type="number" min="1" max="5" class="form-control text-center" required></td>
+                                        <td><input type="number" min="1" max="5" class="form-control text-center" required></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="text" class="form-control" placeholder="ชื่อเพื่อนคนที่ 2"></td>
+                                        <td><input type="number" min="1" max="5" class="form-control text-center"></td>
+                                        <td><input type="number" min="1" max="5" class="form-control text-center"></td>
+                                        <td><input type="number" min="1" max="5" class="form-control text-center"></td>
+                                        <td><input type="number" min="1" max="5" class="form-control text-center"></td>
+                                        <td><input type="number" min="1" max="5" class="form-control text-center"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h5 class="fw-bold text-primary mb-3">ส่วนที่ 3: ข้อคิดเห็นเพิ่มเติม</h5>
+                        <div class="mb-3">
+                            <label class="form-label">สมาชิกที่ควรได้รับคำชมเป็นพิเศษ และอุปสรรคในการทำงานกลุ่ม (ถ้ามี)</label>
+                            <textarea class="form-control" rows="3" id="f1_comment"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 py-2">บันทึกแบบประเมินที่ 1</button>
+                    </form>
+                </div>
+
+                <!-- FORM 2 -->
+                <div class="tab-pane fade" id="form2" role="tabpanel">
+                    <form id="evalForm2" onsubmit="submitForm2(event)">
+                        <div class="alert alert-info">
+                            <strong>คำชี้แจง:</strong> ให้ประเมินการนำเสนอของกลุ่มอื่นในชั้นเรียน และโหวตเลือก 3 กลุ่มที่นำเสนอได้ดีที่สุด (ห้ามเลือกกลุ่มตนเอง)
+                        </div>
+
+                        <h5 class="fw-bold text-primary mb-3">ส่วนที่ 1: โหวตเลือก 3 กลุ่มที่นำเสนอได้ดีที่สุด</h5>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-4">
+                                <label class="form-label font-weight-bold">อันดับที่ 1 (3 คะแนน)</label>
+                                <select class="form-select" required id="vote_rank1">
+                                    <option value="">-- เลือกกลุ่ม --</option>
+                                    <option value="1">กลุ่มที่ 1</option>
+                                    <option value="2">กลุ่มที่ 2</option>
+                                    <option value="3">กลุ่มที่ 3</option>
+                                    <option value="4">กลุ่มที่ 4</option>
+                                    <option value="5">กลุ่มที่ 5</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label font-weight-bold">อันดับที่ 2 (2 คะแนน)</label>
+                                <select class="form-select" required id="vote_rank2">
+                                    <option value="">-- เลือกกลุ่ม --</option>
+                                    <option value="1">กลุ่มที่ 1</option>
+                                    <option value="2">กลุ่มที่ 2</option>
+                                    <option value="3">กลุ่มที่ 3</option>
+                                    <option value="4">กลุ่มที่ 4</option>
+                                    <option value="5">กลุ่มที่ 5</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label font-weight-bold">อันดับที่ 3 (1 คะแนน)</label>
+                                <select class="form-select" required id="vote_rank3">
+                                    <option value="">-- เลือกกลุ่ม --</option>
+                                    <option value="1">กลุ่มที่ 1</option>
+                                    <option value="2">กลุ่มที่ 2</option>
+                                    <option value="3">กลุ่มที่ 3</option>
+                                    <option value="4">กลุ่มที่ 4</option>
+                                    <option value="5">กลุ่มที่ 5</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <h5 class="fw-bold text-primary mb-3">ส่วนที่ 2: ข้อเสนอแนะเพิ่มเติม</h5>
+                        <div class="mb-3">
+                            <label class="form-label">สิ่งที่ได้เรียนรู้จากการฟังนำเสนอของกลุ่มอื่น</label>
+                            <textarea class="form-control" rows="3" id="f2_comment"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 py-2">บันทึกแบบประเมินที่ 2</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap 5 JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function submitForm1(e) {
+        e.preventDefault();
+        alert('บันทึกแบบประเมินที่ 1 เรียบร้อยแล้ว!');
+    }
+    function submitForm2(e) {
+        e.preventDefault();
+        alert('บันทึกแบบประเมินที่ 2 และผลโหวตเรียบร้อยแล้ว!');
+    }
+</script>
+</body>
+</html>
