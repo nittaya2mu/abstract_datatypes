@@ -1,8 +1,0 @@
-{
-  "description": "Example inputs for manual demonstration, not persistent parking state",
-  "initial_occupied_plates": ["DEMO-001", "DEMO-002"],
-  "new_plate": "DEMO-003",
-  "expected_nearest_slot": "P3",
-  "reservation_seconds": 300,
-  "latest_log_capacity": 30
-}
