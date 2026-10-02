@@ -1,0 +1,3 @@
+# Runtime: Python standard library only. Tkinter must be included in your Python install.
+# Optional build tool for Windows executable:
+# pyinstaller==6.22.3
