@@ -1,0 +1,57 @@
+Hash Table (FNV-1a + separate chaining); clock(); REPEAT=1000000; 10 targets/run
+LOCAL measurement only. Rerun on classroom computer for official results.
+
+VALIDATION n=1000 (original unsorted indices, zero-based)
+target=12 index=593 expected=593 PASS
+target=9998 index=467 expected=467 PASS
+target=4661 index=13 expected=13 PASS
+target=2457 index=101 expected=101 PASS
+target=7384 index=528 expected=528 PASS
+target=4536 index=0 expected=0 PASS
+target=1379 index=999 expected=999 PASS
+target=2665 index=-1 expected=-1 PASS
+target=4143 index=-1 expected=-1 PASS
+target=174 index=-1 expected=-1 PASS
+RUN 1 total_sec=0.180000 per_search_ms=0.000018000
+RUN 2 total_sec=0.096000 per_search_ms=0.000009600
+RUN 3 total_sec=0.118000 per_search_ms=0.000011800
+RUN 4 total_sec=0.106000 per_search_ms=0.000010600
+RUN 5 total_sec=0.097000 per_search_ms=0.000009700
+SUMMARY n=1000 found=7 missing=3 trimmed_mean_ms=0.000010700
+
+VALIDATION n=10000 (original unsorted indices, zero-based)
+target=5 index=2397 expected=2397 PASS
+target=99982 index=4211 expected=4211 PASS
+target=50539 index=490 expected=490 PASS
+target=25132 index=5943 expected=5943 PASS
+target=75701 index=5697 expected=5697 PASS
+target=8449 index=0 expected=0 PASS
+target=35186 index=9999 expected=9999 PASS
+target=3320 index=-1 expected=-1 PASS
+target=8375 index=-1 expected=-1 PASS
+target=99516 index=-1 expected=-1 PASS
+RUN 1 total_sec=0.106000 per_search_ms=0.000010600
+RUN 2 total_sec=0.105000 per_search_ms=0.000010500
+RUN 3 total_sec=0.099000 per_search_ms=0.000009900
+RUN 4 total_sec=0.088000 per_search_ms=0.000008800
+RUN 5 total_sec=0.104000 per_search_ms=0.000010400
+SUMMARY n=10000 found=7 missing=3 trimmed_mean_ms=0.000010267 ratio=0.959502 k=-0.017954
+
+VALIDATION n=100000 (original unsorted indices, zero-based)
+target=30 index=46175 expected=46175 PASS
+target=999986 index=44369 expected=44369 PASS
+target=500489 index=87759 expected=87759 PASS
+target=249986 index=4756 expected=4756 PASS
+target=749784 index=66370 expected=66370 PASS
+target=271656 index=0 expected=0 PASS
+target=301700 index=99999 expected=99999 PASS
+target=643565 index=-1 expected=-1 PASS
+target=894237 index=-1 expected=-1 PASS
+target=676889 index=-1 expected=-1 PASS
+RUN 1 total_sec=0.199000 per_search_ms=0.000019900
+RUN 2 total_sec=0.109000 per_search_ms=0.000010900
+RUN 3 total_sec=0.107000 per_search_ms=0.000010700
+RUN 4 total_sec=0.131000 per_search_ms=0.000013100
+RUN 5 total_sec=0.082000 per_search_ms=0.000008200
+SUMMARY n=100000 found=7 missing=3 trimmed_mean_ms=0.000011567 ratio=1.126623 k=0.051779
+Expected lookup O(1), worst O(n); preparation/space O(n). Near-zero k alone cannot distinguish O(1) from O(log n).
