@@ -1,0 +1,62 @@
+{
+  "name": "smartbudget",
+  "version": "1.0.0",
+  "description": "SmartBudget - ระบบจัดการรายรับ-รายจ่ายและวางแผนลดค่าใช้จ่ายสำหรับนักศึกษา",
+  "main": "electron-main.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "node backend/server.js",
+    "test": "node tests/test-suite.js",
+    "benchmark": "node tests/benchmark.js",
+    "desktop": "electron .",
+    "dist": "electron-builder --win portable",
+    "dist:installer": "electron-builder --win nsis"
+  },
+  "keywords": [
+    "budget",
+    "students",
+    "data-structures",
+    "algorithms"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "better-sqlite3": "^11.3.0",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "electron": "^38.0.0",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "com.smartbudget.desktop",
+    "productName": "SmartBudget",
+    "asar": true,
+    "files": [
+      "electron-main.js",
+      "backend/**/*",
+      "frontend/**/*",
+      "data/**/*",
+      "package.json",
+      "README.md"
+    ],
+    "asarUnpack": [
+      "node_modules/better-sqlite3/**/*.node"
+    ],
+    "win": {
+      "target": [
+        "portable"
+      ],
+      "artifactName": "SmartBudget-${version}-${arch}.${ext}"
+    },
+    "portable": {
+      "artifactName": "SmartBudget-${version}-${arch}-Portable.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  }
+}

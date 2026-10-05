@@ -1,0 +1,30 @@
+SMARTBUDGET DESKTOP APP
+=======================
+
+โปรเจกต์นี้ถูกปรับจาก Web App เป็น Windows Desktop App ด้วย Electron
+
+วิธีสร้าง .EXE บน Windows
+-------------------------
+1. แตก ZIP ทั้งหมดลงในเครื่อง Windows
+2. เปิดโฟลเดอร์ 01_Code
+3. ดับเบิลคลิก build-windows.bat
+4. รอจนเสร็จ
+5. เข้าโฟลเดอร์ dist
+6. ใช้ไฟล์ SmartBudget-1.0.0-x64-Portable.exe หรือไฟล์ Setup .exe
+
+การใช้งาน
+---------
+- ดับเบิลคลิก SmartBudget.exe
+- โปรแกรมจะเปิดเป็นหน้าต่าง Desktop ของตัวเอง
+- ไม่ต้องเปิด Chrome
+- ไม่ต้องพิมพ์ localhost:3000
+- SQLite จะเก็บฐานข้อมูลไว้ใน Windows AppData ของผู้ใช้
+
+บัญชีทดลอง
+----------
+Username: student
+Password: 1234
+
+หมายเหตุ
+--------
+ต้องสร้าง .exe บน Windows เพื่อให้ better-sqlite3 ใช้ native binary ของ Windows ได้ถูกต้อง
