@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SmartBudget — Dashboard</title>
+<link rel="stylesheet" href="css/style.css" />
+<script src="js/theme.js"></script>
+</head>
+<body>
+
+<div class="app-shell">
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="mark">₿</div>
+      <span>SmartBudget</span>
+    </div>
+
+    <nav>
+      <a href="#dashboard" class="nav-item" data-view="dashboard"><span class="ico">▦</span> Dashboard</a>
+      <a href="#transactions" class="nav-item" data-view="transactions"><span class="ico">📄</span> รายรับ-รายจ่าย</a>
+      <a href="#search" class="nav-item" data-view="search"><span class="ico">🔍</span> ค้นหาธุรกรรม</a>
+      <a href="#optimization" class="nav-item" data-view="optimization"><span class="ico">⚙</span> Budget Optimization</a>
+      <a href="#wishlist" class="nav-item" data-view="wishlist"><span class="ico">🎯</span> ของที่อยากได้</a>
+      <a href="#datastructure" class="nav-item" data-view="datastructure"><span class="ico">🧬</span> Data Structure &amp; Algorithm</a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="avatar" id="userAvatar">น</div>
+        <div class="who">
+          <div id="userName">นิสิต Demo</div>
+          <small>student</small>
+        </div>
+      </div>
+      <a href="#" class="logout-link" id="logoutBtn">ออกจากระบบ</a>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-left">
+        <button class="menu-toggle" id="menuToggle">☰</button>
+        <div>
+          <h1 id="pageTitle">Dashboard</h1>
+          <div class="sub" id="pageSub">ภาพรวมการเงินของคุณเดือนนี้</div>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <button class="theme-toggle" id="themeToggleBtn">
+          <span class="ico" data-theme-icon>☾</span><span data-theme-label>โหมดมืด</span>
+        </button>
+        <button class="btn btn-primary" id="addTxTopBtn">+ เพิ่มรายการ</button>
+      </div>
+    </div>
+
+    <div class="view">
+
+      <!-- ============ DASHBOARD VIEW ============ -->
+      <div class="view-inner" id="view-dashboard">
+        <div class="grid-4" id="summaryCards"></div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="section-head">
+              <h3>ความคืบหน้าการใช้งบประมาณ</h3>
+              <span class="hint" id="budgetHint"></span>
+            </div>
+            <div style="margin-top:14px;">
+              <div class="progress-track"><div class="progress-fill" id="dashProgressFill" style="width:0%"></div></div>
+            </div>
+            <div id="dashBudgetAlert" style="margin-top:14px;"></div>
+          </div>
+
+          <div class="card">
+            <h3>หมวดหมู่ที่ใช้เงินมากที่สุด</h3>
+            <div id="topCategoryBox" style="margin-top:14px;"></div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="section-head">
+              <h3>สรุปรายจ่ายแต่ละหมวดหมู่</h3>
+              <span class="hint">คำนวณด้วย Hash Table</span>
+            </div>
+            <div id="categoryBreakdown" style="margin-top:14px;"></div>
+          </div>
+
+          <div class="card">
+            <div class="section-head">
+              <h3>รายการล่าสุด</h3>
+              <a href="#transactions" class="hint">ดูทั้งหมด →</a>
+            </div>
+            <div id="recentList" style="margin-top:8px;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ TRANSACTIONS VIEW ============ -->
+      <div class="view-inner" id="view-transactions">
+        <div class="card">
+          <div class="section-head">
+            <h3>รายการทั้งหมด</h3>
+            <span class="hint" id="txCountHint"></span>
+          </div>
+          <div class="table-wrap" style="margin-top:14px;">
+            <table>
+              <thead>
+                <tr>
+                  <th>วันที่ / เวลา</th><th>ประเภท</th><th>หมวดหมู่</th><th>รายละเอียด</th>
+                  <th>ความจำเป็น</th><th style="text-align:right;">จำนวนเงิน</th><th></th>
+                </tr>
+              </thead>
+              <tbody id="txTableBody"></tbody>
+            </table>
+          </div>
+          <div id="txEmptyState"></div>
+        </div>
+      </div>
+
+      <!-- ============ SEARCH VIEW ============ -->
+      <div class="view-inner" id="view-search">
+        <div class="card">
+          <h3>ค้นหาธุรกรรมย้อนหลัง</h3>
+          <div class="filter-bar" style="margin-top:16px;">
+            <div class="filter-field">
+              <label>Keyword</label>
+              <input type="text" id="searchKeyword" placeholder="ค้นหาหมวดหมู่ / รายละเอียด" />
+            </div>
+            <div class="filter-field">
+              <label>วันที่เริ่มต้น</label>
+              <input type="date" id="searchStart" />
+            </div>
+            <div class="filter-field">
+              <label>วันที่สิ้นสุด</label>
+              <input type="date" id="searchEnd" />
+            </div>
+            <div class="filter-field">
+              <label>หมวดหมู่</label>
+              <select id="searchCategory"><option value="">ทั้งหมด</option></select>
+            </div>
+            <div class="filter-field">
+              <label>ประเภท</label>
+              <select id="searchType">
+                <option value="">ทั้งหมด</option>
+                <option value="income">รายรับ</option>
+                <option value="expense">รายจ่าย</option>
+              </select>
+            </div>
+            <button class="btn btn-primary" id="searchBtn">ค้นหา</button>
+            <button class="btn btn-ghost" id="searchResetBtn">ล้างตัวกรอง</button>
+          </div>
+
+          <div style="margin-top:16px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+            <span class="hint" id="searchResultHint">แสดงรายการทั้งหมด</span>
+            <div class="sort-btns">
+              <span style="font-size:13px;color:var(--gray-500);align-self:center;margin-right:4px;">เรียงตาม:</span>
+              <button class="sort-btn active" data-sort="date">วันที่</button>
+              <button class="sort-btn" data-sort="amount">จำนวนเงิน</button>
+              <button class="sort-btn" data-sort="category">หมวดหมู่</button>
+              <button class="sort-btn" id="sortDirBtn" data-dir="desc">มาก → น้อย</button>
+            </div>
+          </div>
+
+          <div class="table-wrap" style="margin-top:14px;">
+            <table>
+              <thead>
+                <tr><th>วันที่ / เวลา</th><th>ประเภท</th><th>หมวดหมู่</th><th>รายละเอียด</th><th>ความจำเป็น</th><th style="text-align:right;">จำนวนเงิน</th></tr>
+              </thead>
+              <tbody id="searchTableBody"></tbody>
+            </table>
+          </div>
+          <div id="searchEmptyState"></div>
+        </div>
+      </div>
+
+      <!-- ============ OPTIMIZATION VIEW ============ -->
+      <div class="view-inner" id="view-optimization">
+        <div class="card">
+          <div class="section-head">
+            <h3>ตั้งค่างบประมาณรายเดือน</h3>
+          </div>
+          <div class="budget-set-row" style="margin-top:14px;">
+            <input type="number" id="budgetInput" placeholder="เช่น 10000" />
+            <button class="btn btn-primary" id="saveBudgetBtn">บันทึกงบประมาณ</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="section-head">
+            <h3>ผลการวิเคราะห์งบประมาณ</h3>
+            <div class="method-toggle" id="methodToggle">
+              <button class="active" data-method="greedy">Greedy Algorithm</button>
+              <button data-method="knapsack">0/1 Knapsack (DP)</button>
+            </div>
+          </div>
+          <div class="opt-summary-grid" style="margin-top:16px;" id="optSummaryGrid"></div>
+          <div id="optAlertBox" style="margin-top:14px;"></div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <h3>รายการที่แนะนำให้ลด/ตัด</h3>
+            <div id="cutListBox" style="margin-top:14px;"></div>
+          </div>
+          <div class="card">
+            <h3>ขั้นตอนการคำนวณของอัลกอริทึม</h3>
+            <div id="stepsBox" style="margin-top:16px;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ WISHLIST / SAVINGS GOAL VIEW ============ -->
+      <div class="view-inner" id="view-wishlist">
+        <div class="card">
+          <div class="section-head">
+            <h3>ของที่อยากได้ &amp; แผนการเก็บเงิน</h3>
+            <button class="btn btn-primary btn-sm" id="addWishBtn">+ เพิ่มของที่อยากได้</button>
+          </div>
+          <p class="hint" style="margin-top:8px;">เลือกรูปแบบการเก็บเงินได้ 3 แบบ: เก็บเท่ากันทุกวัน, เก็บแบบทวีคูณ, หรือกำหนดเองแล้วให้ระบบคำนวณจำนวนวันให้</p>
+        </div>
+        <div class="wishlist-grid" id="wishlistGrid"></div>
+        <div id="wishlistEmptyState"></div>
+      </div>
+
+      <!-- ============ DATA STRUCTURE & ALGORITHM VIEW ============ -->
+      <div class="view-inner" id="view-datastructure">
+        <div class="card">
+          <div class="tabs">
+            <button class="tab-btn active" data-tab="dll">Doubly Linked List</button>
+            <button class="tab-btn" data-tab="avl">AVL Tree</button>
+            <button class="tab-btn" data-tab="hash">Hash Table</button>
+            <button class="tab-btn" data-tab="sort">Sorting Benchmark</button>
+          </div>
+
+          <div class="tab-panel active" id="tab-dll" style="margin-top:20px;">
+            <p class="hint" style="margin-bottom:14px;">โครงสร้าง Doubly Linked List เก็บธุรกรรมตามลำดับที่แทรกเข้ามา แต่ละ Node มีตัวชี้ <b>prev</b> (ย้อนกลับ) และ <b>next</b> (ไปข้างหน้า) ทำให้เพิ่ม/ลบรายการทำได้ทันทีโดยไม่ต้องขยับข้อมูลอื่น</p>
+            <div class="grid-4" style="margin-bottom:16px;">
+              <div class="card"><div class="card-title">จำนวน Node</div><div class="card-value" id="dllSize">0</div></div>
+              <div class="card"><div class="card-title">Head (เก่าสุด)</div><div class="card-value" id="dllHead" style="font-size:14px;">-</div></div>
+              <div class="card"><div class="card-title">Tail (ใหม่สุด)</div><div class="card-value" id="dllTail" style="font-size:14px;">-</div></div>
+              <div class="card"><div class="card-title">Complexity</div><div class="card-value" style="font-size:14px;">Insert/Delete O(1)</div></div>
+            </div>
+            <div class="node-chain mono" id="dllChain"></div>
+          </div>
+
+          <div class="tab-panel" id="tab-avl" style="margin-top:20px;">
+            <p class="hint" style="margin-bottom:14px;">AVL Tree ใช้ <b>วันเวลาของธุรกรรม (timestamp)</b> เป็น Key และปรับสมดุลต้นไม้อัตโนมัติทุกครั้งที่เพิ่ม/ลบข้อมูล ทำให้ Range Search (ค้นหาตามช่วงเวลา) มีความเร็ว O(log n + k)</p>
+            <div class="grid-4" style="margin-bottom:16px;">
+              <div class="card"><div class="card-title">จำนวน Node</div><div class="card-value" id="avlSize">0</div></div>
+              <div class="card"><div class="card-title">ความสูงต้นไม้ (Height)</div><div class="card-value" id="avlHeight">0</div></div>
+              <div class="card"><div class="card-title">Balance</div><div class="card-value badge badge-success" style="font-size:13px;">Self-Balancing</div></div>
+              <div class="card"><div class="card-title">Complexity</div><div class="card-value" style="font-size:14px;">Search O(log n)</div></div>
+            </div>
+            <div class="section-head"><h3 style="font-size:14px;">ทดลอง Range Search</h3></div>
+            <div class="filter-bar" style="margin-top:10px;">
+              <div class="filter-field"><label>จากวันที่</label><input type="date" id="avlDemoStart" /></div>
+              <div class="filter-field"><label>ถึงวันที่</label><input type="date" id="avlDemoEnd" /></div>
+              <button class="btn btn-primary" id="avlDemoBtn">ค้นหาในต้นไม้</button>
+            </div>
+            <div id="avlDemoResult" style="margin-top:14px;"></div>
+            <h4 style="margin-top:20px; font-size:13px; color:var(--gray-500);">Visualization (In-order โครงสร้างบางส่วน)</h4>
+            <div class="tree-viz" id="avlViz"></div>
+          </div>
+
+          <div class="tab-panel" id="tab-hash" style="margin-top:20px;">
+            <p class="hint" style="margin-bottom:14px;">Hash Table แบบ Separate Chaining ใช้ชื่อหมวดหมู่เป็น Key ผ่าน DJB2 Hash Function แล้วรวมยอดเงินแต่ละหมวดหมู่ไว้ในถัง (Bucket) เดียวกัน ทำให้การรวมยอดทำได้ O(1) โดยเฉลี่ย</p>
+            <div class="grid-4" style="margin-bottom:16px;">
+              <div class="card"><div class="card-title">จำนวน Bucket</div><div class="card-value" id="hashBuckets">32</div></div>
+              <div class="card"><div class="card-title">หมวดหมู่ทั้งหมด</div><div class="card-value" id="hashKeys">0</div></div>
+              <div class="card"><div class="card-title">Load Factor</div><div class="card-value" id="hashLoad">0.00</div></div>
+              <div class="card"><div class="card-title">Complexity</div><div class="card-value" style="font-size:14px;">Get/Add O(1) เฉลี่ย</div></div>
+            </div>
+            <div id="hashBucketViz"></div>
+          </div>
+
+          <div class="tab-panel" id="tab-sort" style="margin-top:20px;">
+            <p class="hint" style="margin-bottom:14px;">เปรียบเทียบ Quick Sort และ Merge Sort บนชุดข้อมูลธุรกรรมปัจจุบัน วัดจำนวนการเปรียบเทียบและเวลาที่ใช้จริงในเบราว์เซอร์ (Demo Benchmark อาจมีความคลาดเคลื่อนเล็กน้อยขึ้นกับอุปกรณ์)</p>
+            <div class="filter-bar" style="margin-bottom:16px;">
+              <div class="filter-field">
+                <label>เรียงตาม</label>
+                <select id="benchKey"><option value="amount">จำนวนเงิน</option><option value="date">วันที่</option><option value="category">หมวดหมู่</option></select>
+              </div>
+              <button class="btn btn-primary" id="runBenchBtn">รันการทดสอบ</button>
+            </div>
+            <div class="bench-grid" id="benchGrid"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Transaction Modal -->
+<div class="overlay" id="txModalOverlay">
+  <div class="modal">
+    <button class="close-x" id="closeTxModal">✕</button>
+    <h3 id="txModalTitle">เพิ่มรายการ</h3>
+    <form id="txForm">
+      <input type="hidden" id="txId" />
+      <div class="type-toggle" style="margin-top:16px;">
+        <button type="button" class="active income" data-type="income">รายรับ</button>
+        <button type="button" class="expense" data-type="expense">รายจ่าย</button>
+      </div>
+
+      <div class="form-row">
+        <div class="field" style="margin-top:0;">
+          <label>จำนวนเงิน (บาท)</label>
+          <input type="number" id="txAmount" min="0" step="0.01" required />
+        </div>
+        <div class="field" style="margin-top:0;">
+          <label>หมวดหมู่</label>
+          <select id="txCategory">
+            <option>อาหาร</option><option>เดินทาง</option><option>การเรียน</option>
+            <option>บันเทิง</option><option>ช้อปปิ้ง</option><option>บิล/สาธารณูปโภค</option>
+            <option>เงินเดือน/ค่าขนม</option><option>อื่นๆ</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="field" style="margin-top:0;">
+          <label>วันที่</label>
+          <input type="date" id="txDate" required />
+        </div>
+        <div class="field" style="margin-top:0;">
+          <label>เวลา</label>
+          <input type="time" id="txTime" required />
+        </div>
+      </div>
+
+      <div class="field">
+        <label>รายละเอียด</label>
+        <input type="text" id="txNote" placeholder="เช่น ค่าอาหารกลางวัน" />
+      </div>
+
+      <div class="field" id="necessityField">
+        <label>ค่าความจำเป็น (1 = จำเป็นมาก, 5 = ตัดได้ง่าย)</label>
+        <div class="necessity-picker">
+          <button type="button" data-n="1">1</button>
+          <button type="button" data-n="2">2</button>
+          <button type="button" class="active" data-n="3">3</button>
+          <button type="button" data-n="4">4</button>
+          <button type="button" data-n="5">5</button>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn btn-ghost" id="cancelTxBtn">ยกเลิก</button>
+        <button type="submit" class="btn btn-primary" id="submitTxBtn">บันทึกรายการ</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Wishlist Modal -->
+<div class="overlay" id="wishModalOverlay">
+  <div class="modal">
+    <button class="close-x" id="closeWishModal">✕</button>
+    <h3 id="wishModalTitle">เพิ่มของที่อยากได้</h3>
+    <form id="wishForm">
+      <input type="hidden" id="wishId" />
+      <div class="form-row single">
+        <div class="field" style="margin-top:0;">
+          <label>ชื่อของที่อยากได้</label>
+          <input type="text" id="wishName" placeholder="เช่น หูฟังไร้สาย" required />
+        </div>
+      </div>
+      <div class="form-row single">
+        <div class="field" style="margin-top:0;">
+          <label>ราคา (บาท)</label>
+          <input type="number" id="wishPrice" min="1" step="0.01" required />
+        </div>
+      </div>
+
+      <div class="field">
+        <label>รูปแบบการเก็บเงิน</label>
+        <div class="plan-tabs">
+          <button type="button" class="plan-tab active" data-plan="equal">1. เก็บเท่ากันทุกวัน</button>
+          <button type="button" class="plan-tab" data-plan="multiplier">2. เก็บวันละทวีคูณ</button>
+          <button type="button" class="plan-tab" data-plan="custom">3. กำหนดเอง</button>
+        </div>
+
+        <div class="plan-fields active" id="plan-equal">
+          <div class="form-row">
+            <div class="field" style="margin-top:0;">
+              <label>ต้องการเก็บให้ครบภายในกี่วัน</label>
+              <input type="number" id="equalDays" min="1" value="30" />
+            </div>
+          </div>
+        </div>
+
+        <div class="plan-fields" id="plan-multiplier">
+          <div class="form-row">
+            <div class="field" style="margin-top:0;">
+              <label>เงินวันแรก (บาท)</label>
+              <input type="number" id="multStart" min="1" value="10" />
+            </div>
+            <div class="field" style="margin-top:0;">
+              <label>ตัวคูณต่อวัน (เท่า)</label>
+              <input type="number" id="multFactor" min="1.01" step="0.1" value="2" />
+            </div>
+          </div>
+        </div>
+
+        <div class="plan-fields" id="plan-custom">
+          <div class="form-row">
+            <div class="field" style="margin-top:0;">
+              <label>ต้องการเก็บวันละกี่บาท</label>
+              <input type="number" id="customDaily" min="1" value="50" />
+            </div>
+          </div>
+        </div>
+
+        <div class="calc-preview" id="planPreview">กรอกข้อมูลด้านบนเพื่อดูผลการคำนวณ</div>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn btn-ghost" id="cancelWishBtn">ยกเลิก</button>
+        <button type="submit" class="btn btn-primary">บันทึกเป้าหมาย</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Deposit Modal -->
+<div class="overlay" id="depositModalOverlay">
+  <div class="modal" style="max-width:400px;">
+    <button class="close-x" id="closeDepositModal">✕</button>
+    <h3>ฝากเงินเข้าเป้าหมาย</h3>
+    <p class="hint" id="depositWishName" style="margin-top:6px;"></p>
+    <form id="depositForm">
+      <input type="hidden" id="depositWishId" />
+      <div class="field">
+        <label>จำนวนเงินที่ฝากวันนี้ (บาท)</label>
+        <div class="deposit-row">
+          <input type="number" id="depositAmount" min="1" step="0.01" required />
+        </div>
+        <div class="hint" id="depositSuggestHint" style="margin-top:6px;"></div>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn btn-ghost" id="cancelDepositBtn">ยกเลิก</button>
+        <button type="submit" class="btn btn-primary">ฝากเงิน</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/auth.js"></script>
+<script src="js/linkedList.js"></script>
+<script src="js/avlTree.js"></script>
+<script src="js/hashTable.js"></script>
+<script src="js/quickSort.js"></script>
+<script src="js/mergeSort.js"></script>
+<script src="js/optimizer.js"></script>
+<script src="js/sampleData.js"></script>
+<script src="js/store.js"></script>
+<script src="js/wishlistPlanner.js"></script>
+<script src="js/wishlistStore.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

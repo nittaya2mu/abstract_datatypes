@@ -1,0 +1,18 @@
+{
+  "name": "smartbudget",
+  "version": "1.0.0",
+  "description": "SmartBudget - ระบบจัดการรายรับ-รายจ่ายและวางแผนลดค่าใช้จ่ายสำหรับนักศึกษา",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "node backend/server.js",
+    "test": "node tests/test-suite.js",
+    "benchmark": "node tests/benchmark.js"
+  },
+  "keywords": ["budget", "students", "data-structures", "algorithms"],
+  "license": "MIT",
+  "dependencies": {
+    "better-sqlite3": "^11.3.0",
+    "express": "^4.19.2"
+  }
+}

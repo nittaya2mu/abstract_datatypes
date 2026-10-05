@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SmartBudget — เข้าสู่ระบบ</title>
+<link rel="stylesheet" href="css/style.css" />
+<script src="js/theme.js"></script>
+</head>
+<body>
+  <div class="login-shell">
+    <div class="login-visual">
+      <button class="theme-toggle theme-toggle-login" id="themeToggleBtn">
+        <span class="ico" data-theme-icon>☾</span><span data-theme-label>โหมดมืด</span>
+      </button>
+      <div class="brand">
+        <div class="mark">₿</div>
+        <span>SmartBudget</span>
+      </div>
+      <div class="headline">
+        <h1>วางแผนเงินเดือนให้อยู่ ก่อนสิ้นเดือนจะมาถึง</h1>
+        <p>ระบบบันทึกรายรับ-รายจ่ายสำหรับนักศึกษา พร้อมอัลกอริทึมช่วยตัดสินใจว่าควรลดค่าใช้จ่ายรายการไหน เมื่องบประมาณเริ่มไม่พอ</p>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><b>3</b><span>โครงสร้างข้อมูลหลัก</span></div>
+        <div class="stat"><b>2</b><span>อัลกอริทึมการเรียงลำดับ</span></div>
+        <div class="stat"><b>2</b><span>วิธีปรับงบประมาณ</span></div>
+      </div>
+    </div>
+
+    <div class="login-panel">
+      <div class="login-card">
+        <h2>เข้าสู่ระบบ</h2>
+        <p class="sub">ลงชื่อเข้าใช้เพื่อจัดการงบประมาณของคุณ</p>
+
+        <form id="loginForm">
+          <div class="field">
+            <label for="username">Username</label>
+            <input type="text" id="username" autocomplete="username" placeholder="student" />
+          </div>
+          <div class="field">
+            <label for="password">Password</label>
+            <input type="password" id="password" autocomplete="current-password" placeholder="••••" />
+          </div>
+          <div id="loginError" class="login-error">Username หรือ Password ไม่ถูกต้อง</div>
+          <button type="submit" class="btn btn-primary btn-block">เข้าสู่ระบบ</button>
+        </form>
+
+        <div class="demo-box">
+          <span>บัญชีทดลอง: <code>student</code> / <code>1234</code></span>
+          <button type="button" class="btn btn-ghost btn-sm" id="fillDemo">ใช้เลย</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script>
+    const form = document.getElementById('loginForm');
+    const errorBox = document.getElementById('loginError');
+
+    if (Auth.isLoggedIn()) window.location.href = 'dashboard.html';
+
+    document.getElementById('themeToggleBtn').addEventListener('click', () => Theme.toggle());
+
+    document.getElementById('fillDemo').addEventListener('click', () => {
+      document.getElementById('username').value = 'student';
+      document.getElementById('password').value = '1234';
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+      const res = Auth.login(username, password);
+      if (res.ok) {
+        window.location.href = 'dashboard.html';
+      } else {
+        errorBox.textContent = res.message;
+        errorBox.classList.add('show');
+      }
+    });
+  </script>
+</body>
+</html>

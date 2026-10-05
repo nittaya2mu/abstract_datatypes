@@ -1,0 +1,125 @@
+{
+  "budget": 10000,
+  "transactions": [
+    {
+      "id": "tx0001",
+      "type": "income",
+      "amount": 15000,
+      "category": "เงินเดือน/ค่าขนม",
+      "date": "2026-09-01",
+      "time": "08:00",
+      "note": "เงินโอนจากที่บ้านประจำเดือน",
+      "necessity": null
+    },
+    {
+      "id": "tx0002",
+      "type": "expense",
+      "amount": 1800,
+      "category": "อาหาร",
+      "date": "2026-09-03",
+      "time": "12:30",
+      "note": "ค่าอาหารกลางวันทั้งสัปดาห์",
+      "necessity": 1
+    },
+    {
+      "id": "tx0003",
+      "type": "expense",
+      "amount": 1200,
+      "category": "เดินทาง",
+      "date": "2026-09-04",
+      "time": "07:45",
+      "note": "ค่าน้ำมัน/ค่ารถโดยสารไป-กลับมหาวิทยาลัย",
+      "necessity": 2
+    },
+    {
+      "id": "tx0004",
+      "type": "expense",
+      "amount": 1800,
+      "category": "การเรียน",
+      "date": "2026-09-06",
+      "time": "10:00",
+      "note": "ค่าซื้อหนังสือและอุปกรณ์การเรียน",
+      "necessity": 1
+    },
+    {
+      "id": "tx0005",
+      "type": "expense",
+      "amount": 1400,
+      "category": "บิล/สาธารณูปโภค",
+      "date": "2026-09-08",
+      "time": "18:00",
+      "note": "ค่าอินเทอร์เน็ตห้องพัก",
+      "necessity": 1
+    },
+    {
+      "id": "tx0006",
+      "type": "expense",
+      "amount": 2200,
+      "category": "ช้อปปิ้ง",
+      "date": "2026-09-10",
+      "time": "20:15",
+      "note": "ซื้อหูฟังไร้สายเครื่องใหม่",
+      "necessity": 5
+    },
+    {
+      "id": "tx0007",
+      "type": "expense",
+      "amount": 1500,
+      "category": "บันเทิง",
+      "date": "2026-09-13",
+      "time": "21:00",
+      "note": "ซื้อเกมออนไลน์",
+      "necessity": 5
+    },
+    {
+      "id": "tx0008",
+      "type": "expense",
+      "amount": 900,
+      "category": "อาหาร",
+      "date": "2026-09-16",
+      "time": "19:30",
+      "note": "ชานมไข่มุกและของว่าง",
+      "necessity": 4
+    },
+    {
+      "id": "tx0009",
+      "type": "expense",
+      "amount": 1000,
+      "category": "บันเทิง",
+      "date": "2026-09-19",
+      "time": "22:00",
+      "note": "ค่าสมัครสตรีมมิงเพลง/หนัง",
+      "necessity": 4
+    },
+    {
+      "id": "tx0010",
+      "type": "expense",
+      "amount": 650,
+      "category": "เดินทาง",
+      "date": "2026-09-22",
+      "time": "13:00",
+      "note": "ค่าแท็กซี่ไปธุระด่วน",
+      "necessity": 2
+    },
+    {
+      "id": "tx0011",
+      "type": "expense",
+      "amount": 500,
+      "category": "อาหาร",
+      "date": "2026-09-25",
+      "time": "08:15",
+      "note": "อาหารเช้า",
+      "necessity": 1
+    },
+    {
+      "id": "tx0012",
+      "type": "expense",
+      "amount": 1300,
+      "category": "ช้อปปิ้ง",
+      "date": "2026-09-27",
+      "time": "17:00",
+      "note": "เสื้อผ้าใหม่",
+      "necessity": 5
+    }
+  ]
+}
