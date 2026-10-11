@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="refresh" content="4">
+<title>Teenoi Suki - ผังโต๊ะ</title>
+<style>
+:root{--bg:#0b1220;--panel:#111a2e;--line:#1f2b45;--text:#e8eefc;--mut:#8b9bbd;--gold:#f2b705}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Segoe UI",Tahoma,system-ui,sans-serif}
+header{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:14px 20px;background:#0e1730;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+h1{font-size:20px;margin:0}
+h1 span{color:var(--mut);font-weight:400;margin-left:8px;font-size:15px}
+.pills{display:flex;gap:8px;flex-wrap:wrap}
+.pill{padding:5px 12px;border-radius:999px;font-size:13px;border:1px solid var(--line);background:#0b1220}
+.pill.g{color:#46d17a;border-color:#1f6b3d;background:#0f2a1c}
+.pill.r{color:#ff7a7a;border-color:#7a2a2a;background:#2a1212}
+.pill.y{color:var(--gold);border-color:#7a5c0a;background:#2a2108}
+.wrap{display:grid;grid-template-columns:1fr 320px;gap:16px;padding:16px 20px;max-width:1500px;margin:0 auto}
+@media(max-width:1000px){.wrap{grid-template-columns:1fr}}
+.branch{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:16px}
+.bh{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px}
+.bh h2{margin:0;font-size:17px}
+.floor{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;padding:12px;border-radius:10px;background-color:#0a0f1d;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:24px 24px}
+.tbl{border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:4px;min-height:150px;border:2px solid}
+.tbl.wide{grid-column:span 2}
+.tbl.free{background:linear-gradient(160deg,#2fa75a,#1f7a41);border-color:#46d17a}
+.tbl.busy{background:linear-gradient(160deg,#d64545,#9c2b2b);border-color:#ff7a7a}
+.tno{font-size:22px;font-weight:700}
+.cap{font-size:12px;opacity:.9}
+.seats{display:flex;flex-wrap:wrap;gap:4px;margin:2px 0}
+.seats i{width:10px;height:10px;border-radius:50%;background:#fff;opacity:.95}
+.tbl.free .seats i{background:transparent;border:2px solid #d9ffe8}
+.st{font-size:12px;font-weight:700;letter-spacing:.04em}
+.lk{font-size:11px;background:rgba(0,0,0,.28);border-radius:6px;padding:2px 6px;align-self:flex-start}
+.who{font-size:13px;font-weight:600;word-break:break-word}
+.tbl ul{list-style:none;margin:2px 0;padding:0;font-size:12px;display:flex;flex-direction:column;gap:2px}
+.tbl li{display:flex;justify-content:space-between;gap:8px;background:rgba(0,0,0,.22);padding:2px 6px;border-radius:5px}
+.tot{font-size:12px;font-weight:700;margin-top:auto;text-align:right}
+.none{font-size:12px;opacity:.85}
+aside .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:16px}
+aside h3{margin:0 0 10px;font-size:15px}
+aside h4{margin:10px 0 6px;font-size:13px;color:var(--mut);font-weight:600}
+.q{display:flex;justify-content:space-between;gap:8px;padding:6px 8px;border-radius:8px;background:#0b1220;margin-bottom:6px;font-size:13px}
+.q small{color:var(--mut);display:block}
+.empty{color:var(--mut);font-size:13px}
+.m{display:flex;justify-content:space-between;gap:8px;padding:5px 0;border-bottom:1px dashed var(--line);font-size:14px}
+.pot{text-align:center;margin-bottom:6px}
+.stamp{color:var(--mut);font-size:12px}
+</style></head><body>
+<header><h1>Teenoi Suki<span>ผังโต๊ะ (Table Map)</span></h1><div class="pills"><span class="pill g">โต๊ะว่าง 8 / 12</span><span class="pill r">มีลูกค้า 4</span><span class="pill y">คิวรอ 2</span><span class="pill">ที่นั่งว่างรวม 40</span><span class="stamp">อัปเดตล่าสุด 22:42:59</span></div></header>
+<div class="wrap"><main>
+<section class="branch"><div class="bh"><h2>Central</h2><div class="pills"><span class="pill g">ว่าง 4 / 4 โต๊ะ</span><span class="pill">ที่นั่งว่าง 20</span><span class="pill y">คิวรอ 0</span></div></div>
+<div class="floor">
+<div class="tbl free"><div class="tno">T101</div><div class="cap">2 ที่นั่ง</div><div class="seats"><i></i><i></i></div><div class="st">FREE · ว่าง</div></div>
+<div class="tbl free"><div class="tno">T102</div><div class="cap">4 ที่นั่ง</div><div class="seats"><i></i><i></i><i></i><i></i></div><div class="st">FREE · ว่าง</div></div>
+<div class="tbl free wide"><div class="tno">T103</div><div class="cap">6 ที่นั่ง</div><div class="seats"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="st">FREE · ว่าง</div></div>
+<div class="tbl free wide"><div class="tno">T104</div><div class="cap">8 ที่นั่ง</div><div class="seats"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="st">FREE · ว่าง</div></div>
+</div></section>
+<section class="branch"><div class="bh"><h2>Siam</h2><div class="pills"><span class="pill g">ว่าง 0 / 4 โต๊ะ</span><span class="pill">ที่นั่งว่าง 0</span><span class="pill y">คิวรอ 2</span></div></div>
+<div class="floor">
+<div class="tbl busy"><div class="tno">T201</div><div class="cap">2 ที่นั่ง</div><div class="seats"><i></i><i></i></div><div class="st">BUSY · มีลูกค้า</div><div class="who">Cust1</div><div class="none">ยังไม่มีรายการอาหาร</div></div>
+<div class="tbl busy"><div class="tno">T202</div><div class="cap">4 ที่นั่ง</div><div class="seats"><i></i><i></i><i></i><i></i></div><div class="st">BUSY · มีลูกค้า</div><div class="who">Cust5_Wait</div><div class="none">ยังไม่มีรายการอาหาร</div></div>
+<div class="tbl busy wide"><div class="tno">T203</div><div class="cap">6 ที่นั่ง</div><div class="seats"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="st">BUSY · มีลูกค้า</div><div class="who">Cust3</div><div class="none">ยังไม่มีรายการอาหาร</div></div>
+<div class="tbl busy wide"><div class="tno">T204</div><div class="cap">8 ที่นั่ง</div><div class="seats"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="st">BUSY · มีลูกค้า</div><div class="who">Cust4</div><div class="none">ยังไม่มีรายการอาหาร</div></div>
+</div></section>
+<section class="branch"><div class="bh"><h2>Rangsit</h2><div class="pills"><span class="pill g">ว่าง 4 / 4 โต๊ะ</span><span class="pill">ที่นั่งว่าง 20</span><span class="pill y">คิวรอ 0</span></div></div>
+<div class="floor">
+<div class="tbl free"><div class="tno">T301</div><div class="cap">2 ที่นั่ง</div><div class="seats"><i></i><i></i></div><div class="st">FREE · ว่าง</div></div>
+<div class="tbl free"><div class="tno">T302</div><div class="cap">4 ที่นั่ง</div><div class="seats"><i></i><i></i><i></i><i></i></div><div class="st">FREE · ว่าง</div></div>
+<div class="tbl free wide"><div class="tno">T303</div><div class="cap">6 ที่นั่ง</div><div class="seats"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="st">FREE · ว่าง</div></div>
+<div class="tbl free wide"><div class="tno">T304</div><div class="cap">8 ที่นั่ง</div><div class="seats"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="st">FREE · ว่าง</div></div>
+</div></section>
+</main><aside>
+<div class="card"><h3>คิวรอ (Waiting List)</h3><h4>Siam</h4><div class="q"><div>1. Cust6_Wait<small>0866666666</small></div><b>4 ท่าน</b></div><div class="q"><div>2. Cust7_Wait<small>0877777777</small></div><b>4 ท่าน</b></div></div>
+<div class="card"><div class="pot"><svg viewBox="0 0 120 64" width="96" height="52"><path d="M20 27h80v10a30 25 0 0 1-30 25H50A30 25 0 0 1 20 37z" fill="#d64545"/><rect x="14" y="23" width="92" height="6" rx="3" fill="#f2b705"/><path d="M45 16c-4-5 4-7 0-12M60 16c-4-5 4-7 0-12M75 16c-4-5 4-7 0-12" stroke="#8b9bbd" fill="none" stroke-width="2" stroke-linecap="round"/></svg></div><h3>เมนูอาหาร (Menu)</h3><div class="m"><span>เนื้อวัวสไลซ์</span><b>189.00</b></div><div class="m"><span>หมูสไลซ์</span><b>129.00</b></div><div class="m"><span>กุ้งสด</span><b>159.00</b></div><div class="m"><span>ผักรวม</span><b>59.00</b></div><div class="m"><span>เห็ดรวม</span><b>69.00</b></div><div class="m"><span>วุ้นเส้น</span><b>39.00</b></div><div class="m"><span>ไข่ไก่</span><b>15.00</b></div><div class="m"><span>น้ำจิ้มสุกี้</span><b>20.00</b></div><div class="m"><span>น้ำดื่ม</span><b>20.00</b></div></div>
+</aside></div></body></html>
