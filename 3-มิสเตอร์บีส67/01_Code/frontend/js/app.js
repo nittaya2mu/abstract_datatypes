@@ -519,7 +519,18 @@ function closeWishModal() { wishModal.classList.remove('show'); }
 function setPlanTab(type) {
   currentPlanType = type;
   document.querySelectorAll('.plan-tab').forEach(b => b.classList.toggle('active', b.dataset.plan === type));
-  document.querySelectorAll('.plan-fields').forEach(p => p.classList.toggle('active', p.id === 'plan-' + type));
+
+  // เปิดใช้งานเฉพาะช่องของแผนที่เลือกเท่านั้น
+  // ป้องกัน HTML5 validation ของช่องที่ซ่อนอยู่ (เช่น min/step)
+  // มาขัดขวางการ submit ฟอร์ม
+  document.querySelectorAll('.plan-fields').forEach(panel => {
+    const active = panel.id === 'plan-' + type;
+    panel.classList.toggle('active', active);
+    panel.querySelectorAll('input, select, textarea').forEach(input => {
+      input.disabled = !active;
+    });
+  });
+
   updatePlanPreview();
 }
 document.querySelectorAll('.plan-tab').forEach(b => b.addEventListener('click', () => setPlanTab(b.dataset.plan)));
@@ -553,21 +564,51 @@ function updatePlanPreview() {
 
 document.getElementById('wishForm').addEventListener('submit', (e) => {
   e.preventDefault();
+
   const name = document.getElementById('wishName').value.trim();
   const price = Number(document.getElementById('wishPrice').value);
-  if (!name || !price || price <= 0) { toast('กรุณากรอกชื่อและราคาให้ถูกต้อง'); return; }
+  if (!name) {
+    toast('กรุณากรอกชื่อของที่อยากได้');
+    document.getElementById('wishName').focus();
+    return;
+  }
+  if (!Number.isFinite(price) || price <= 0) {
+    toast('กรุณากรอกราคาให้มากกว่า 0 บาท');
+    document.getElementById('wishPrice').focus();
+    return;
+  }
 
   let planParams;
   if (currentPlanType === 'equal') {
-    const days = Number(document.getElementById('equalDays').value) || 1;
+    const days = Number(document.getElementById('equalDays').value);
+    if (!Number.isFinite(days) || days < 1) {
+      toast('กรุณาระบุจำนวนวันอย่างน้อย 1 วัน');
+      document.getElementById('equalDays').focus();
+      return;
+    }
     const plan = calcEqualPlan(price, days);
     planParams = { days: plan.days, dailyAmount: plan.dailyAmount };
   } else if (currentPlanType === 'multiplier') {
-    const start = Number(document.getElementById('multStart').value) || 1;
-    const factor = Number(document.getElementById('multFactor').value) || 2;
+    const start = Number(document.getElementById('multStart').value);
+    const factor = Number(document.getElementById('multFactor').value);
+    if (!Number.isFinite(start) || start < 1) {
+      toast('กรุณาระบุเงินวันแรกอย่างน้อย 1 บาท');
+      document.getElementById('multStart').focus();
+      return;
+    }
+    if (!Number.isFinite(factor) || factor < 1.01) {
+      toast('ตัวคูณต้องไม่น้อยกว่า 1.01 เท่า');
+      document.getElementById('multFactor').focus();
+      return;
+    }
     planParams = { startAmount: start, multiplier: factor };
   } else {
-    const daily = Number(document.getElementById('customDaily').value) || 1;
+    const daily = Number(document.getElementById('customDaily').value);
+    if (!Number.isFinite(daily) || daily < 1) {
+      toast('กรุณาระบุเงินที่ต้องการเก็บต่อวันอย่างน้อย 1 บาท');
+      document.getElementById('customDaily').focus();
+      return;
+    }
     planParams = { dailyAmount: daily };
   }
 

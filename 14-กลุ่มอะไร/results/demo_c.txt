@@ -1,0 +1,120 @@
+SmartParking C | ADT Group 14
+Commands: join USER [20|30|45], start CODE/USER, pickup CODE/USER, cancel CODE/USER,
+undo, advance SECONDS, maintenance MACHINE, status, history, demo, quit.
+Parking: join=reserve, start=enter, pickup=exit. C checks elapsed time before each command.
+> 
+SmartParking C | ADT Group 14 | time=0 s | active=3 | waiting=0 | log=5/30
+P1 R0001 DEMO-001 OCCUPIED distance=10m
+P2 R0002 DEMO-002 OCCUPIED distance=16m
+P3 R0003 DEMO-003 RESERVED deadline=300 distance=22m
+P4 FREE distance=28m
+P5 FREE distance=34m
+P6 FREE distance=40m
+P7 FREE distance=46m
+P8 FREE distance=52m
+P9 FREE distance=58m
+P10 FREE distance=64m
+> OK
+
+SmartParking C | ADT Group 14 | time=300 s | active=2 | waiting=0 | log=6/30
+P1 R0001 DEMO-001 OCCUPIED distance=10m
+P2 R0002 DEMO-002 OCCUPIED distance=16m
+P3 FREE distance=22m
+P4 FREE distance=28m
+P5 FREE distance=34m
+P6 FREE distance=40m
+P7 FREE distance=46m
+P8 FREE distance=52m
+P9 FREE distance=58m
+P10 FREE distance=64m
+> CREATED R0004 NEW-001
+OK
+
+SmartParking C | ADT Group 14 | time=300 s | active=3 | waiting=0 | log=7/30
+P1 R0001 DEMO-001 OCCUPIED distance=10m
+P2 R0002 DEMO-002 OCCUPIED distance=16m
+P3 R0004 NEW-001 RESERVED deadline=600 distance=22m
+P4 FREE distance=28m
+P5 FREE distance=34m
+P6 FREE distance=40m
+P7 FREE distance=46m
+P8 FREE distance=52m
+P9 FREE distance=58m
+P10 FREE distance=64m
+> OK
+
+SmartParking C | ADT Group 14 | time=300 s | active=3 | waiting=0 | log=8/30
+P1 R0001 DEMO-001 OCCUPIED distance=10m
+P2 R0002 DEMO-002 OCCUPIED distance=16m
+P3 R0004 NEW-001 OCCUPIED distance=22m
+P4 FREE distance=28m
+P5 FREE distance=34m
+P6 FREE distance=40m
+P7 FREE distance=46m
+P8 FREE distance=52m
+P9 FREE distance=58m
+P10 FREE distance=64m
+> REJECTED: invalid/duplicate/full/expired state
+
+SmartParking C | ADT Group 14 | time=300 s | active=3 | waiting=0 | log=8/30
+P1 R0001 DEMO-001 OCCUPIED distance=10m
+P2 R0002 DEMO-002 OCCUPIED distance=16m
+P3 R0004 NEW-001 OCCUPIED distance=22m
+P4 FREE distance=28m
+P5 FREE distance=34m
+P6 FREE distance=40m
+P7 FREE distance=46m
+P8 FREE distance=52m
+P9 FREE distance=58m
+P10 FREE distance=64m
+> OK
+
+SmartParking C | ADT Group 14 | time=600 s | active=3 | waiting=0 | log=8/30
+P1 R0001 DEMO-001 OCCUPIED distance=10m
+P2 R0002 DEMO-002 OCCUPIED distance=16m
+P3 R0004 NEW-001 OCCUPIED distance=22m
+P4 FREE distance=28m
+P5 FREE distance=34m
+P6 FREE distance=40m
+P7 FREE distance=46m
+P8 FREE distance=52m
+P9 FREE distance=58m
+P10 FREE distance=64m
+> 
+SmartParking C | ADT Group 14 | time=600 s | active=3 | waiting=0 | log=8/30
+P1 R0001 DEMO-001 OCCUPIED distance=10m
+P2 R0002 DEMO-002 OCCUPIED distance=16m
+P3 R0004 NEW-001 OCCUPIED distance=22m
+P4 FREE distance=28m
+P5 FREE distance=34m
+P6 FREE distance=40m
+P7 FREE distance=46m
+P8 FREE distance=52m
+P9 FREE distance=58m
+P10 FREE distance=64m
+> OK
+
+SmartParking C | ADT Group 14 | time=600 s | active=2 | waiting=0 | log=9/30
+P1 R0001 DEMO-001 OCCUPIED distance=10m
+P2 R0002 DEMO-002 OCCUPIED distance=16m
+P3 FREE distance=22m
+P4 FREE distance=28m
+P5 FREE distance=34m
+P6 FREE distance=40m
+P7 FREE distance=46m
+P8 FREE distance=52m
+P9 FREE distance=58m
+P10 FREE distance=64m
+> 
+SmartParking C | ADT Group 14 | time=600 s | active=2 | waiting=0 | log=9/30
+P1 R0001 DEMO-001 OCCUPIED distance=10m
+P2 R0002 DEMO-002 OCCUPIED distance=16m
+P3 FREE distance=22m
+P4 FREE distance=28m
+P5 FREE distance=34m
+P6 FREE distance=40m
+P7 FREE distance=46m
+P8 FREE distance=52m
+P9 FREE distance=58m
+P10 FREE distance=64m
+> 

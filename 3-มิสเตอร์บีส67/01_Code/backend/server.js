@@ -40,7 +40,19 @@ app.use((err, req, res, next) => {
   res.status(500).json({ ok: false, message: 'เกิดข้อผิดพลาดภายในเซิร์ฟเวอร์', error: err.message });
 });
 
-app.listen(PORT, () => {
-  console.log(`SmartBudget API is running at http://localhost:${PORT}`);
-  console.log(`Frontend (static): http://localhost:${PORT}/index.html`);
-});
+function start(port = PORT) {
+  return new Promise((resolve, reject) => {
+    const listener = app.listen(port, '127.0.0.1', () => {
+      console.log(`SmartBudget API is running at http://127.0.0.1:${listener.address().port}`);
+      console.log(`Frontend (static): http://127.0.0.1:${listener.address().port}/index.html`);
+      resolve(listener);
+    });
+    listener.once('error', reject);
+  });
+}
+
+if (require.main === module) {
+  start();
+}
+
+module.exports = { app, start };

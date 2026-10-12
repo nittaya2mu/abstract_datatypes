@@ -1,0 +1,13 @@
+
+SmartParking C | ADT Group 14 | time=0 s | active=3 | waiting=0 | log=5/30
+P1 R0001 DEMO-001 OCCUPIED distance=10m
+P2 R0002 DEMO-002 OCCUPIED distance=16m
+P3 R0003 DEMO-003 RESERVED deadline=300 distance=22m
+P4 FREE distance=28m
+P5 FREE distance=34m
+P6 FREE distance=40m
+P7 FREE distance=46m
+P8 FREE distance=52m
+P9 FREE distance=58m
+P10 FREE distance=64m
+SELFTEST PASS: hash reuse, indexed heap deletion, domain demo, boundaries/capacity, 1000 cycles, 1500 randomized commands.
